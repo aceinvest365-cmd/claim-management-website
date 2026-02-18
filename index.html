@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ClaimSave — Insurance Claims. Finally Transparent. Finally Fast.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: #0f172a;
+      background: #f5f5f7;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── Utility ──────────────────────────────────────── */
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+    .section {
+      padding: 100px 0;
+    }
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0d9488;
+      margin-bottom: 12px;
+    }
+    .section-heading {
+      font-size: 2.4rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #0f172a;
+      margin-bottom: 18px;
+    }
+    .section-sub {
+      font-size: 1.1rem;
+      color: #475569;
+      max-width: 620px;
+      line-height: 1.7;
+    }
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Buttons ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 28px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: #0d9488;
+      color: #fff;
+      box-shadow: 0 1px 3px rgba(13,148,136,0.3), 0 6px 16px rgba(13,148,136,0.15);
+    }
+    .btn-primary:hover {
+      background: #0f766e;
+      box-shadow: 0 2px 6px rgba(13,148,136,0.35), 0 10px 24px rgba(13,148,136,0.2);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background: #ffffff;
+      color: #1e293b;
+      border: 1px solid #e2e8f0;
+    }
+    .btn-secondary:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+      transform: translateY(-1px);
+    }
+
+    /* ── Navbar ───────────────────────────────────────── */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(245,245,247,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      transition: box-shadow 0.3s ease;
+    }
+    .navbar.scrolled {
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .navbar .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #0d9488;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #475569;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #0d9488; }
+    .nav-cta .btn { padding: 10px 22px; font-size: 0.88rem; }
+
+    /* Mobile hamburger */
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .mobile-toggle span {
+      width: 22px;
+      height: 2px;
+      background: #1e293b;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    .hero {
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: #f5f5f7;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(13,148,136,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(13,148,136,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero .container {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      width: 100%;
+    }
+    .hero-content {
+      flex: 1;
+      max-width: 50%;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0fdfa;
+      color: #0d9488;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(13,148,136,0.15);
+    }
+    .hero-badge span { font-size: 0.82rem; }
+    .hero h1 {
+      font-size: 4.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #0f172a;
+      margin-bottom: 22px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #0d9488, #14b8a6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #64748b;
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .hero-buttons .btn {
+      padding: 16px 34px;
+      font-size: 1.05rem;
+    }
+    .hero-visual {
+      flex: 1;
+      max-width: 50%;
+      position: relative;
+    }
+    .hero-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 50px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 36px;
+      position: relative;
+    }
+    .hero-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    .hero-card-header h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .status-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .status-green { background: #ecfdf5; color: #059669; }
+    .status-teal { background: #f0fdfa; color: #0d9488; }
+    .status-amber { background: #fffbeb; color: #d97706; }
+    .progress-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .progress-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .progress-line {
+      flex: 1;
+    }
+    .progress-line .label {
+      font-size: 0.88rem;
+      color: #64748b;
+      margin-bottom: 4px;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #f1f5f9;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1.2s ease;
+    }
+    .hero-card-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-item .num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+    .stat-item .lbl {
+      font-size: 0.78rem;
+      color: #94a3b8;
+      font-weight: 500;
+      margin-top: 2px;
+    }
+    .floating-card {
+      position: absolute;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.05);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: float 4s ease-in-out infinite;
+    }
+    .floating-card-1 {
+      top: -28px;
+      right: -40px;
+    }
+    .floating-card-2 {
+      bottom: -28px;
+      left: -40px;
+      animation-delay: 2s;
+    }
+    .floating-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .floating-card .fc-text {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #0f172a;
+    }
+    .floating-card .fc-sub {
+      font-size: 0.68rem;
+      color: #94a3b8;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── Who We Are ───────────────────────────────────── */
+    .who-section {
+      background: #ffffff;
+    }
+    .who-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    .who-text p {
+      font-size: 1.05rem;
+      color: #475569;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .who-metrics {
+      display: flex;
+      gap: 40px;
+      margin-top: 32px;
+    }
+    .who-metric .big {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #0d9488;
+    }
+    .who-metric .small {
+      font-size: 0.82rem;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .who-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .who-card {
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1px solid #f1f5f9;
+      transition: all 0.25s ease;
+    }
+    .who-card:hover {
+      border-color: #ccfbf1;
+      box-shadow: 0 4px 16px rgba(13,148,136,0.06);
+    }
+    .who-card:nth-child(2) { transform: none; }
+    .who-card:nth-child(3) { transform: none; }
+    .who-card-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .who-card h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+    .who-card p {
+      font-size: 0.88rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* ── Features ──────────────────────────────────────── */
+    .features-section {
+      background: #f5f5f7;
+    }
+    .features-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .features-header .section-sub {
+      margin: 0 auto;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .feature-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 32px 28px;
+      border: 1px solid #f1f5f9;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0d9488, #14b8a6);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+    .feature-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      border-color: #ccfbf1;
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 0.88rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    /* ── Benefits ──────────────────────────────────────── */
+    .benefits-section {
+      background: #ffffff;
+    }
+    .benefits-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .benefits-header .section-sub {
+      margin: 0 auto;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .benefit-card {
+      text-align: center;
+      padding: 44px 32px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%);
+      border: 1px solid #e6f7f5;
+      transition: all 0.3s ease;
+    }
+    .benefit-card:hover {
+      box-shadow: 0 12px 36px rgba(13,148,136,0.08);
+      transform: translateY(-4px);
+    }
+    .benefit-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 22px;
+    }
+    .benefit-card h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+    .benefit-card p {
+      font-size: 0.9rem;
+      color: #64748b;
+      line-height: 1.65;
+    }
+
+    /* ── Data / Reporting ─────────────────────────────── */
+    .data-section {
+      background: #0f172a;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .data-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(13,148,136,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .data-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .data-content .section-heading {
+      color: #fff;
+    }
+    .data-content .section-sub {
+      color: #94a3b8;
+      margin-bottom: 32px;
+    }
+    .data-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .data-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+    .data-list-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(13,148,136,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .data-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .data-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 24px;
+      backdrop-filter: blur(8px);
+    }
+    .data-card .dc-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    .data-card .dc-value {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .data-card .dc-change {
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+    .dc-up { color: #34d399; }
+    .dc-down { color: #f87171; }
+    .data-card:nth-child(2) {
+      transform: none;
+    }
+    .data-card:nth-child(3) {
+      transform: none;
+    }
+    .mini-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 40px;
+      margin-top: 12px;
+    }
+    .mini-bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      background: rgba(13,148,136,0.5);
+      transition: height 0.5s ease;
+    }
+
+    /* ── CTA ───────────────────────────────────────────── */
+    .cta-section {
+      background: #f5f5f7;
+      padding: 100px 0;
+    }
+    .cta-inner {
+      background: linear-gradient(135deg, #0d9488, #0f766e);
+      border-radius: 24px;
+      padding: 72px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 250px;
+      height: 250px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cta-inner::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -40px;
+      width: 200px;
+      height: 200px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .cta-inner h2 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .cta-inner p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 36px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .btn-white {
+      background: #fff;
+      color: #0d9488;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .btn-white:hover {
+      background: #f8fafc;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ── Footer ────────────────────────────────────────── */
+    .footer {
+      background: #ffffff;
+      padding: 60px 0 32px;
+      border-top: 1px solid #f1f5f9;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p {
+      font-size: 0.88rem;
+      color: #64748b;
+      line-height: 1.7;
+      margin-top: 14px;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0f172a;
+      margin-bottom: 18px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col a {
+      font-size: 0.88rem;
+      color: #64748b;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: #0d9488; }
+    .footer-bottom {
+      border-top: 1px solid #e2e8f0;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 16px;
+    }
+    .footer-socials a {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .footer-socials a:hover {
+      border-color: #0d9488;
+      background: #f0fdfa;
+    }
+
+    /* ── Responsive ────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 2.8rem; }
+      .hero .container { gap: 40px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .data-grid { gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .mobile-toggle { display: flex; }
+
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        background: #ffffff;
+        padding: 24px;
+        gap: 20px;
+        border-bottom: 1px solid #f1f5f9;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      }
+
+      .hero { padding: 120px 0 80px; min-height: auto; }
+      .hero .container {
+        flex-direction: column;
+        text-align: center;
+      }
+      .hero-content { max-width: 100%; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero p { margin-left: auto; margin-right: auto; }
+      .hero-buttons { justify-content: center; }
+      .hero-visual { max-width: 400px; margin: 0 auto; }
+
+      .who-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .who-visual { order: -1; }
+
+      .features-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .benefit-card { max-width: 420px; margin: 0 auto; width: 100%; }
+
+      .data-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .cta-inner { padding: 48px 28px; }
+      .cta-inner h2 { font-size: 1.8rem; }
+
+      .section-heading { font-size: 1.9rem; }
+
+      .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 1.8rem; }
+      .hero-card-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+      .floating-card { display: none; }
+      .data-visual { grid-template-columns: 1fr; }
+      .data-card:nth-child(2),
+      .data-card:nth-child(3) { transform: none; }
+      .who-card:nth-child(2),
+      .who-card:nth-child(3) { transform: none; }
+      .who-metrics { flex-direction: column; gap: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navbar ────────────────────────────────────────── -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="logo">
+        <div class="logo-icon">C</div>
+        ClaimSave
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#who">About</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#data">Reporting</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://claimsave.co.za" target="_blank" class="btn btn-primary">See Our App</a>
+      </div>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ──────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content fade-in">
+        <div class="hero-badge">
+          <span>&#9679;</span> Trusted by leading insurers
+        </div>
+        <h1>Insurance Claims. <span class="highlight">Finally Transparent.</span> Finally Fast.</h1>
+        <p>ClaimSave removes the middleman, eliminates paperwork, and gives everyone involved real-time visibility — so claims get resolved faster than ever.</p>
+        <div class="hero-buttons">
+          <a href="#cta" class="btn btn-primary">
+            Request Demo
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          </a>
+          <a href="#features" class="btn btn-secondary">
+            See How It Works
+          </a>
+        </div>
+      </div>
+      <div class="hero-visual fade-in">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <h4>Claim #4821 — Vehicle Collision</h4>
+            <span class="status-badge status-green">Approved</span>
+          </div>
+          <div class="progress-row">
+            <div class="progress-dot" style="background:#0d9488"></div>
+            <div class="progress-line">
+              <div class="label">Filed &rarr; Assessment</div>
+              <div class="progress-bar"><div class="progress-bar-fill" style="width:100%;background:#0d9488"></div></div>
+            </div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-dot" style="background:#0d9488"></div>
+            <div class="progress-line">
+              <div class="label">Assessment &rarr; Review</div>
+              <div class="progress-bar"><div class="progress-bar-fill" style="width:100%;background:#0d9488"></div></div>
+            </div>
+          </div>
+          <div class="progress-row">
+            <div class="progress-dot" style="background:#34d399"></div>
+            <div class="progress-line">
+              <div class="label">Review &rarr; Payout</div>
+              <div class="progress-bar"><div class="progress-bar-fill" style="width:100%;background:#34d399"></div></div>
+            </div>
+          </div>
+          <div class="hero-card-stats">
+            <div class="stat-item">
+              <div class="num">3.2d</div>
+              <div class="lbl">Avg. Resolution</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">98%</div>
+              <div class="lbl">Satisfaction</div>
+            </div>
+            <div class="stat-item">
+              <div class="num">24/7</div>
+              <div class="lbl">Live Tracking</div>
+            </div>
+          </div>
+          <!-- floating cards -->
+          <div class="floating-card floating-card-1">
+            <div class="floating-icon" style="background:#ecfdf5">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </div>
+            <div>
+              <div class="fc-text">Claim Approved</div>
+              <div class="fc-sub">Just now</div>
+            </div>
+          </div>
+          <div class="floating-card floating-card-2">
+            <div class="floating-icon" style="background:#f0fdfa">
+              <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+            </div>
+            <div>
+              <div class="fc-text">2 Documents Uploaded</div>
+              <div class="fc-sub">5 min ago</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Who We Are ────────────────────────────────────── -->
+  <section class="section who-section" id="who">
+    <div class="container">
+      <div class="who-grid">
+        <div class="who-text fade-in">
+          <div class="section-label">Who We Are</div>
+          <h2 class="section-heading">Simplifying insurance claims for everyone involved</h2>
+          <p>ClaimSave is a modern claims management platform that bridges the gap between policyholders, brokers, and insurers. We replace fragmented email threads, lost paperwork, and opaque processes with a single, transparent digital workflow.</p>
+          <p>Our platform gives every stakeholder real-time visibility into every claim — from first notice of loss all the way to settlement — so nothing falls through the cracks.</p>
+          <div class="who-metrics">
+            <div class="who-metric">
+              <div class="big">60%</div>
+              <div class="small">Faster claim resolution</div>
+            </div>
+            <div class="who-metric">
+              <div class="big">10k+</div>
+              <div class="small">Claims processed</div>
+            </div>
+            <div class="who-metric">
+              <div class="big">99.9%</div>
+              <div class="small">Platform uptime</div>
+            </div>
+          </div>
+        </div>
+        <div class="who-visual fade-in">
+          <div class="who-card">
+            <div class="who-card-icon" style="background:#f0fdfa">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+            </div>
+            <h4>Policyholders</h4>
+            <p>File and track claims in minutes</p>
+          </div>
+          <div class="who-card">
+            <div class="who-card-icon" style="background:#ecfdf5">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </div>
+            <h4>Insurers</h4>
+            <p>Assess and approve with full context</p>
+          </div>
+          <div class="who-card">
+            <div class="who-card-icon" style="background:#fef3c7">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </div>
+            <h4>Brokers</h4>
+            <p>Manage clients from one dashboard</p>
+          </div>
+          <div class="who-card">
+            <div class="who-card-icon" style="background:#fce7f3">
+              <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+            </div>
+            <h4>Analysts</h4>
+            <p>Data-driven insights at a glance</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features / What We Do ─────────────────────────── -->
+  <section class="section features-section" id="features">
+    <div class="container">
+      <div class="features-header fade-in">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-heading">Everything you need to manage claims end-to-end</h2>
+        <p class="section-sub">From first notice of loss to final settlement, ClaimSave provides the tools to keep every claim on track.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#f0fdfa">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
+          </div>
+          <h3>Log Claims Digitally</h3>
+          <p>Submit new claims through a guided digital form — no paperwork, no confusion. All information captured upfront for faster processing.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#ecfdf5">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+          </div>
+          <h3>Upload Documents & Photos</h3>
+          <p>Drag and drop supporting evidence — photos, invoices, police reports — directly onto the claim. Everything stored securely in one place.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#fef3c7">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+          </div>
+          <h3>Track Claim Progress Live</h3>
+          <p>See exactly where a claim is in the pipeline — from lodged to assessed, approved, and paid — with real-time status updates.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#fce7f3">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
+          </div>
+          <h3>Automatic Notifications</h3>
+          <p>Get instant alerts when a claim is updated, a document is requested, or an approval comes through. Never miss a beat.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#ede9fe">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" /></svg>
+          </div>
+          <h3>Centralized Communication</h3>
+          <p>Keep all messages, notes, and queries in one thread per claim. No more lost emails or scattered conversations across channels.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#fff7ed">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#ea580c" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+          </div>
+          <h3>Digital Audit Trail</h3>
+          <p>Every action logged. Every change timestamped. A complete, tamper-proof record for compliance, governance, and dispute resolution.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Benefits ──────────────────────────────────────── -->
+  <section class="section benefits-section" id="benefits">
+    <div class="container">
+      <div class="benefits-header fade-in">
+        <div class="section-label">Why ClaimSave</div>
+        <h2 class="section-heading">Benefits that move the needle</h2>
+        <p class="section-sub">Less admin, more action. ClaimSave transforms your claims operation from a cost center into a competitive advantage.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon" style="background:#f0fdfa">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+          </div>
+          <h3>Faster Turnaround</h3>
+          <p>Reduce average claim resolution time by up to 60%. Automated workflows eliminate bottlenecks and keep claims moving at pace.</p>
+        </div>
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon" style="background:#ecfdf5">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+          </div>
+          <h3>Full Transparency</h3>
+          <p>Every stakeholder sees the same status, the same documents, the same timeline. No more "Where's my claim?" phone calls.</p>
+        </div>
+        <div class="benefit-card fade-in">
+          <div class="benefit-icon" style="background:#fef3c7">
+            <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" /></svg>
+          </div>
+          <h3>Reduced Admin Workload</h3>
+          <p>Automation handles reminders, status updates, and document requests — freeing your team to focus on what matters most.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Data & Reporting ──────────────────────────────── -->
+  <section class="section data-section" id="data">
+    <div class="container">
+      <div class="data-grid">
+        <div class="data-content fade-in">
+          <div class="section-label">Data & Reporting</div>
+          <h2 class="section-heading">Insights that drive smarter decisions</h2>
+          <p class="section-sub">ClaimSave doesn't just manage claims — it generates actionable intelligence. Make informed decisions backed by real data.</p>
+          <ul class="data-list">
+            <li>
+              <div class="data-list-icon">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+              </div>
+              Claims trends over time
+            </li>
+            <li>
+              <div class="data-list-icon">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+              </div>
+              Loss ratio analysis
+            </li>
+            <li>
+              <div class="data-list-icon">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+              </div>
+              Incident analysis and categorization
+            </li>
+            <li>
+              <div class="data-list-icon">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+              </div>
+              Risk insights and mitigation reports
+            </li>
+          </ul>
+        </div>
+        <div class="data-visual fade-in">
+          <div class="data-card">
+            <div class="dc-label">Total Claims (YTD)</div>
+            <div class="dc-value">2,847</div>
+            <div class="dc-change dc-up">+12.4% vs last year</div>
+          </div>
+          <div class="data-card">
+            <div class="dc-label">Loss Ratio</div>
+            <div class="dc-value">62.1%</div>
+            <div class="dc-change dc-up">-4.2% improvement</div>
+            <div class="mini-chart">
+              <div class="mini-bar" style="height:55%"></div>
+              <div class="mini-bar" style="height:70%"></div>
+              <div class="mini-bar" style="height:60%"></div>
+              <div class="mini-bar" style="height:80%"></div>
+              <div class="mini-bar" style="height:65%"></div>
+              <div class="mini-bar" style="height:50%"></div>
+              <div class="mini-bar" style="height:45%"></div>
+            </div>
+          </div>
+          <div class="data-card">
+            <div class="dc-label">Avg. Resolution</div>
+            <div class="dc-value">3.2 days</div>
+            <div class="dc-change dc-up">-1.8 days faster</div>
+          </div>
+          <div class="data-card">
+            <div class="dc-label">Open Claims</div>
+            <div class="dc-value">184</div>
+            <div class="dc-change dc-down">+23 this week</div>
+            <div class="mini-chart">
+              <div class="mini-bar" style="height:40%;background:rgba(248,113,113,0.5)"></div>
+              <div class="mini-bar" style="height:55%;background:rgba(248,113,113,0.5)"></div>
+              <div class="mini-bar" style="height:45%;background:rgba(248,113,113,0.5)"></div>
+              <div class="mini-bar" style="height:60%;background:rgba(248,113,113,0.5)"></div>
+              <div class="mini-bar" style="height:75%;background:rgba(248,113,113,0.5)"></div>
+              <div class="mini-bar" style="height:80%;background:rgba(248,113,113,0.5)"></div>
+              <div class="mini-bar" style="height:90%;background:rgba(248,113,113,0.5)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────── -->
+  <section class="cta-section" id="cta">
+    <div class="container">
+      <div class="cta-inner fade-in">
+        <h2>Take control of your insurance claims</h2>
+        <p>Join the insurers, brokers, and businesses already using ClaimSave to process claims faster, reduce admin, and delight their customers.</p>
+        <a href="https://claimsave.co.za" target="_blank" class="btn btn-white">
+          See Our App
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────── -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo">
+            <div class="logo-icon">C</div>
+            ClaimSave
+          </a>
+          <p>Modern claims management for the modern insurer. Transparent, fast, and built for scale.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Product</h4>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#data">Reporting</a></li>
+            <li><a href="#">Integrations</a></li>
+            <li><a href="#">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#who">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">POPIA Compliance</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 ClaimSave. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="#" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="#64748b" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" aria-label="Twitter">
+            <svg width="16" height="16" fill="#64748b" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" aria-label="GitHub">
+            <svg width="16" height="16" fill="#64748b" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── Scripts ───────────────────────────────────────── -->
+  <script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    const toggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+    toggle.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
