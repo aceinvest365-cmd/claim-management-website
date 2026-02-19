@@ -354,12 +354,12 @@
       animation: float 4s ease-in-out infinite;
     }
     .floating-card-1 {
-      top: -28px;
-      right: -40px;
+      top: -50px;
+      right: 40px;
     }
     .floating-card-2 {
-      bottom: -28px;
-      left: -40px;
+      bottom: -50px;
+      left: -80px;
       animation-delay: 2s;
     }
     .floating-icon {
@@ -570,6 +570,64 @@
       font-size: 0.9rem;
       color: #64748b;
       line-height: 1.65;
+    }
+
+    /* ── Platform Capabilities ─────────────────────────── */
+    .platform-section {
+      background: #f5f5f7;
+    }
+    .platform-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .platform-header .section-sub {
+      margin: 0 auto;
+    }
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .platform-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 28px 24px;
+      border: 1px solid #f1f5f9;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.3s ease;
+    }
+    .platform-card:hover {
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      border-color: #ccfbf1;
+      transform: translateY(-2px);
+    }
+    .platform-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .platform-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+    .platform-card p {
+      font-size: 0.82rem;
+      color: #64748b;
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .platform-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 1024px) {
+      .platform-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     /* ── Data / Reporting ─────────────────────────────── */
@@ -897,10 +955,11 @@
         <li><a href="#who">About</a></li>
         <li><a href="#features">Features</a></li>
         <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#platform">Platform</a></li>
         <li><a href="#data">Reporting</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="https://claimsave-v2-csdrkpoq7-claimsave.vercel.app" target="_blank" class="btn btn-primary">See Our App</a>
+        <a href="https://claimsave-v2.vercel.app" target="_blank" class="btn btn-primary">See Our App</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -1101,6 +1160,62 @@
           <h3>Digital Audit Trail</h3>
           <p>Every action logged. Every change timestamped. A complete, tamper-proof record for compliance, governance, and dispute resolution.</p>
         </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#f0fdfa">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <h3>Driver Management & Live Tracking</h3>
+          <p>Monitor your fleet in real time. Get instant alerts for area breaches, standstill detection, and hours-worked thresholds — all from one dashboard.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#fce7f3">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+          </div>
+          <h3>High Risk Area Mapping</h3>
+          <p>Visualize incident hotspots across South Africa with interactive heatmaps. Identify patterns and deploy resources where they matter most.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#ecfdf5">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0" /></svg>
+          </div>
+          <h3>Shipment Tracker</h3>
+          <p>Track active deliveries in real time with transit status updates. Know exactly where your goods are at every stage of the journey.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#eef2ff">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#6366f1" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+          </div>
+          <h3>AI-Powered Intelligence</h3>
+          <p>Leverage artificial intelligence for automated claim analysis, smart recommendations, fraud detection hints, and predictive risk scoring.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#fef3c7">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+          </div>
+          <h3>API Connectivity</h3>
+          <p>Connect ClaimSave to your existing systems with RESTful APIs. Seamless data exchange with insurers, brokers, and third-party platforms.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#fce7f3">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 2v5a2 2 0 002 2h5" /><path stroke-linecap="round" stroke-linejoin="round" d="M9 13h6m-6 3h4" /></svg>
+          </div>
+          <h3>PDF Report Generation</h3>
+          <p>Export any claim as a comprehensive PDF report — complete with status, policy details, incident info, and supporting documentation.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#ecfdf5">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4 4l-4 4m0 0l-4-4m4 4V4" /></svg>
+          </div>
+          <h3>Data Import & Export</h3>
+          <p>Import and export claims and policies in CSV, JSON, or Excel format. Migrate data effortlessly and generate custom reports on demand.</p>
+        </div>
+        <div class="feature-card fade-in">
+          <div class="feature-icon" style="background:#f0fdfa">
+            <svg width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+          </div>
+          <h3>Google Maps Integration</h3>
+          <p>Pin incident locations with address autocomplete, view claims on interactive maps, and analyze geographic trends across your portfolio.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1139,6 +1254,73 @@
     </div>
   </section>
 
+  <!-- ── Platform Capabilities ────────────────────────── -->
+  <section class="section platform-section" id="platform">
+    <div class="container">
+      <div class="platform-header fade-in">
+        <div class="section-label">Built for Scale</div>
+        <h2 class="section-heading">A platform that adapts to how you work</h2>
+        <p class="section-sub">From dark mode to multilingual support, ClaimSave is designed to fit your team's workflow — not the other way around.</p>
+      </div>
+      <div class="platform-grid">
+        <div class="platform-card fade-in">
+          <div class="platform-icon" style="background:#0f172a">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#f8fafc" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+          </div>
+          <div>
+            <h4>Dark Mode & Theming</h4>
+            <p>Switch between light and dark mode. Upload your company logo for a fully branded experience.</p>
+          </div>
+        </div>
+        <div class="platform-card fade-in">
+          <div class="platform-icon" style="background:#f0fdfa">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" /></svg>
+          </div>
+          <div>
+            <h4>Multi-Language Support</h4>
+            <p>Available in English, isiZulu, and Afrikaans — built for South Africa's diverse workforce.</p>
+          </div>
+        </div>
+        <div class="platform-card fade-in">
+          <div class="platform-icon" style="background:#ede9fe">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#7c3aed" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          </div>
+          <div>
+            <h4>Admin & Employee Management</h4>
+            <p>Role-based access for admins and clients. Add, manage, and monitor employee accounts from a central dashboard.</p>
+          </div>
+        </div>
+        <div class="platform-card fade-in">
+          <div class="platform-icon" style="background:#fef3c7">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#d97706" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+          </div>
+          <div>
+            <h4>Mobile Responsive</h4>
+            <p>Full mobile support with drawer navigation. File claims, track progress, and manage policies from any device.</p>
+          </div>
+        </div>
+        <div class="platform-card fade-in">
+          <div class="platform-icon" style="background:#ecfdf5">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#059669" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" /></svg>
+          </div>
+          <div>
+            <h4>Auto-Save Drafts</h4>
+            <p>Never lose your progress. Claim forms automatically save as you type, so you can pick up right where you left off.</p>
+          </div>
+        </div>
+        <div class="platform-card fade-in">
+          <div class="platform-icon" style="background:#fce7f3">
+            <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="#db2777" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+          </div>
+          <div>
+            <h4>Accessibility</h4>
+            <p>Reduce motion toggle, keyboard shortcuts, and screen-reader-friendly components for an inclusive experience.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Data & Reporting ──────────────────────────────── -->
   <section class="section data-section" id="data">
     <div class="container">
@@ -1152,25 +1334,37 @@
               <div class="data-list-icon">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
               </div>
-              Claims trends over time
+              Claims by month, status, and amount trends
             </li>
             <li>
               <div class="data-list-icon">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
               </div>
-              Loss ratio analysis
+              Loss ratio analysis — premiums vs claims paid
+            </li>
+            <li>
+              <div class="data-list-icon">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" /></svg>
+              </div>
+              Visual claim pipeline tracker with real-time stage updates
             </li>
             <li>
               <div class="data-list-icon">
                 <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
               </div>
-              Incident analysis and categorization
+              Incident analysis, categorization, and risk scoring
             </li>
             <li>
               <div class="data-list-icon">
-                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
               </div>
-              Risk insights and mitigation reports
+              Live activity feed across all claims and users
+            </li>
+            <li>
+              <div class="data-list-icon">
+                <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="#14b8a6" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" /></svg>
+              </div>
+              Interactive incident location maps and geographic insights
             </li>
           </ul>
         </div>
@@ -1224,7 +1418,7 @@
       <div class="cta-inner fade-in">
         <h2>Take control of your insurance claims</h2>
         <p>Join the insurers, brokers, and businesses already using ClaimSave to process claims faster, reduce admin, and delight their customers.</p>
-        <a href="https://claimsave-v2-csdrkpoq7-claimsave.vercel.app" target="_blank" class="btn btn-white">
+        <a href="https://claimsave-v2.vercel.app" target="_blank" class="btn btn-white">
           See Our App
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
         </a>
