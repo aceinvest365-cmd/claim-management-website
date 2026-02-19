@@ -623,11 +623,11 @@
       color: #64748b;
       line-height: 1.5;
     }
-    @media (max-width: 768px) {
-      .platform-grid { grid-template-columns: 1fr; }
-    }
     @media (max-width: 1024px) {
       .platform-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .platform-grid { grid-template-columns: 1fr; }
     }
 
     /* ── Data / Reporting ─────────────────────────────── */
@@ -636,6 +636,7 @@
       color: #fff;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 -1px 0 #0f172a, 0 1px 0 #0f172a;
     }
     .data-section::before {
       content: '';
@@ -737,6 +738,7 @@
     .cta-section {
       background: #f5f5f7;
       padding: 100px 0;
+      margin-top: -1px;
     }
     .cta-inner {
       background: linear-gradient(135deg, #0d9488, #0f766e);
@@ -866,6 +868,59 @@
       background: #f0fdfa;
     }
 
+    /* ── Video Banner ─────────────────────────────────── */
+    .video-banner {
+      position: relative;
+      width: 100%;
+      height: 70vh;
+      overflow: hidden;
+      margin-top: 68px;
+    }
+    .video-banner video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+    .video-banner .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .video-banner .overlay-content {
+      text-align: center;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .video-banner .overlay-content .logo-icon {
+      width: 64px;
+      height: 64px;
+      font-size: 1.6rem;
+      background: #0d9488;
+      border-radius: 14px;
+    }
+    .video-banner .overlay-content h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .video-banner .overlay-content p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.8);
+      font-weight: 500;
+    }
+
     /* ── Responsive ────────────────────────────────────── */
     @media (max-width: 1024px) {
       .hero h1 { font-size: 2.8rem; }
@@ -876,6 +931,11 @@
     }
 
     @media (max-width: 768px) {
+      .video-banner { height: 50vh; }
+      .video-banner .overlay-content h2 { font-size: 2.2rem; }
+      .video-banner .overlay-content p { font-size: 1rem; }
+      .video-banner .overlay-content .logo-icon { width: 52px; height: 52px; font-size: 1.3rem; border-radius: 12px; }
+
       .section { padding: 72px 0; }
       .nav-links { display: none; }
       .nav-cta { display: none; }
@@ -930,6 +990,10 @@
     }
 
     @media (max-width: 480px) {
+      .video-banner { height: 40vh; }
+      .video-banner .overlay-content h2 { font-size: 1.8rem; }
+      .video-banner .overlay-content p { font-size: 0.9rem; }
+
       .hero h1 { font-size: 1.8rem; }
       .hero-card-stats { grid-template-columns: repeat(3, 1fr); gap: 8px; }
       .floating-card { display: none; }
@@ -959,13 +1023,27 @@
         <li><a href="#data">Reporting</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="https://claimsave-v2.vercel.app" target="_blank" class="btn btn-primary">See Our App</a>
+        <a href="https://app.claimsave.co.za" target="_blank" class="btn btn-primary">See Our App</a>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
+
+  <!-- ── Video Banner ────────────────────────────────────── -->
+  <section class="video-banner">
+    <video autoplay muted loop playsinline>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    <div class="overlay">
+      <div class="overlay-content">
+        <div class="logo-icon">C</div>
+        <h2>ClaimSave</h2>
+        <p>Insurance Claims Management</p>
+      </div>
+    </div>
+  </section>
 
   <!-- ── Hero ──────────────────────────────────────────── -->
   <section class="hero">
@@ -1418,7 +1496,7 @@
       <div class="cta-inner fade-in">
         <h2>Take control of your insurance claims</h2>
         <p>Join the insurers, brokers, and businesses already using ClaimSave to process claims faster, reduce admin, and delight their customers.</p>
-        <a href="https://claimsave-v2.vercel.app" target="_blank" class="btn btn-white">
+        <a href="https://app.claimsave.co.za" target="_blank" class="btn btn-white">
           See Our App
           <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
         </a>
@@ -1484,6 +1562,9 @@
 
   <!-- ── Scripts ───────────────────────────────────────── -->
   <script>
+    window.history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 10);
