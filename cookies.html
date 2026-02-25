@@ -307,5 +307,210 @@
     <p>&copy; 2026 Claim Save (Pty) Ltd. All rights reserved.</p>
   </footer>
 
+  <!-- ── Cookie Consent Banner ────────────────────────── -->
+  <style>
+    #cs-cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;box-shadow:0 -4px 24px rgba(0,0,0,.08);border-top:1px solid #e2e8f0;padding:24px 5%;transform:translateY(100%);opacity:0;transition:transform .35s ease,opacity .35s ease;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+    #cs-cookie-banner.cs-visible{transform:translateY(0);opacity:1}
+    #cs-cookie-banner-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+    #cs-cookie-text{flex:1 1 420px;font-size:.88rem;line-height:1.65;color:#334155}
+    #cs-cookie-text a{color:#0d9488;text-decoration:underline;font-weight:500}
+    #cs-cookie-text a:hover{color:#0f766e}
+    #cs-cookie-btns{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+    .cs-cookie-btn{font-family:inherit;font-size:.82rem;font-weight:600;border-radius:10px;padding:10px 20px;cursor:pointer;transition:all .2s;border:none;white-space:nowrap}
+    .cs-cookie-btn-accept{background:#0d9488;color:#fff}.cs-cookie-btn-accept:hover{background:#0f766e}
+    .cs-cookie-btn-reject{background:transparent;color:#334155;border:1.5px solid #cbd5e1}.cs-cookie-btn-reject:hover{border-color:#0d9488;color:#0d9488}
+    .cs-cookie-btn-manage{background:transparent;color:#0d9488;border:none;padding:10px 12px;text-decoration:underline}.cs-cookie-btn-manage:hover{color:#0f766e}
+    #cs-cookie-fab{position:fixed;bottom:20px;left:20px;z-index:9998;background:#0d9488;color:#fff;border:none;border-radius:50px;padding:10px 16px;font-family:inherit;font-size:.78rem;font-weight:600;cursor:pointer;box-shadow:0 2px 12px rgba(13,148,136,.3);display:none;align-items:center;gap:6px;transition:background .2s,box-shadow .2s}
+    #cs-cookie-fab:hover{background:#0f766e;box-shadow:0 4px 16px rgba(13,148,136,.4)}
+    #cs-cookie-fab svg{flex-shrink:0}
+    #cs-cookie-modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.45);backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:20px}
+    #cs-cookie-modal-overlay.cs-visible{display:flex}
+    #cs-cookie-modal{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:85vh;overflow-y:auto;box-shadow:0 12px 40px rgba(0,0,0,.15);animation:cs-slideUp .3s ease}
+    @keyframes cs-slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    #cs-cookie-modal-header{padding:24px 24px 0;display:flex;align-items:center;justify-content:space-between}
+    #cs-cookie-modal-header h3{font-size:1.15rem;font-weight:700;color:#0f172a}
+    #cs-cookie-modal-close{background:none;border:none;cursor:pointer;color:#94a3b8;padding:4px;border-radius:8px;transition:color .2s}
+    #cs-cookie-modal-close:hover{color:#0f172a}
+    #cs-cookie-modal-body{padding:20px 24px}
+    .cs-pref-row{display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-bottom:1px solid #f1f5f9}
+    .cs-pref-row:last-child{border-bottom:none}
+    .cs-pref-info{flex:1;padding-right:16px}
+    .cs-pref-name{font-size:.9rem;font-weight:600;color:#0f172a;margin-bottom:2px}
+    .cs-pref-desc{font-size:.78rem;color:#64748b;line-height:1.5}
+    .cs-pref-badge{font-size:.68rem;font-weight:600;color:#0d9488;background:#f0fdfa;padding:2px 8px;border-radius:20px;margin-left:8px}
+    .cs-toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+    .cs-toggle input{opacity:0;width:0;height:0;position:absolute}
+    .cs-toggle-slider{position:absolute;inset:0;background:#cbd5e1;border-radius:24px;cursor:pointer;transition:background .25s}
+    .cs-toggle-slider::before{content:'';position:absolute;left:3px;top:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:transform .25s;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+    .cs-toggle input:checked+.cs-toggle-slider{background:#0d9488}
+    .cs-toggle input:checked+.cs-toggle-slider::before{transform:translateX(20px)}
+    .cs-toggle input:disabled+.cs-toggle-slider{background:#d1d5db;cursor:not-allowed;opacity:.6}
+    .cs-toggle input:disabled:checked+.cs-toggle-slider{background:#99d5cf}
+    #cs-cookie-modal-footer{padding:0 24px 24px;display:flex;justify-content:flex-end}
+    #cs-cookie-modal-footer .cs-cookie-btn-accept{padding:12px 28px;font-size:.88rem}
+    @media(max-width:640px){
+      #cs-cookie-banner{padding:20px 5% 24px}
+      #cs-cookie-banner-inner{flex-direction:column;align-items:stretch;gap:16px}
+      #cs-cookie-btns{flex-direction:column}
+      .cs-cookie-btn{width:100%;text-align:center;padding:12px 20px}
+      #cs-cookie-fab{bottom:16px;left:16px;padding:8px 14px;font-size:.74rem}
+    }
+  </style>
+
+  <div id="cs-cookie-banner" role="dialog" aria-label="Cookie consent">
+    <div id="cs-cookie-banner-inner">
+      <div id="cs-cookie-text">
+        Claim Save uses cookies to enhance your experience, analyse platform performance, and ensure security.
+        By clicking "Accept All", you consent to the use of non-essential cookies in accordance with our
+        <a href="cookies.html">Cookie Policy</a> and <a href="privacy.html">Privacy Policy</a>.
+      </div>
+      <div id="cs-cookie-btns">
+        <button class="cs-cookie-btn cs-cookie-btn-accept" id="cs-cookie-accept">Accept All</button>
+        <button class="cs-cookie-btn cs-cookie-btn-reject" id="cs-cookie-reject">Reject Non-Essential</button>
+        <button class="cs-cookie-btn cs-cookie-btn-manage" id="cs-cookie-manage">Manage Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <button id="cs-cookie-fab" aria-label="Cookie Settings">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Cookie Settings
+  </button>
+
+  <div id="cs-cookie-modal-overlay">
+    <div id="cs-cookie-modal" role="dialog" aria-label="Cookie preferences">
+      <div id="cs-cookie-modal-header">
+        <h3>Cookie Preferences</h3>
+        <button id="cs-cookie-modal-close" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="cs-cookie-modal-body">
+        <div class="cs-pref-row">
+          <div class="cs-pref-info">
+            <div class="cs-pref-name">Essential Cookies <span class="cs-pref-badge">Always Active</span></div>
+            <div class="cs-pref-desc">Required for authentication, security, and core platform functionality. These cannot be disabled.</div>
+          </div>
+          <label class="cs-toggle">
+            <input type="checkbox" checked disabled />
+            <span class="cs-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="cs-pref-row">
+          <div class="cs-pref-info">
+            <div class="cs-pref-name">Analytics Cookies</div>
+            <div class="cs-pref-desc">Help us understand how visitors interact with the platform so we can improve the experience.</div>
+          </div>
+          <label class="cs-toggle">
+            <input type="checkbox" id="cs-pref-analytics" />
+            <span class="cs-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="cs-pref-row">
+          <div class="cs-pref-info">
+            <div class="cs-pref-name">Performance Cookies</div>
+            <div class="cs-pref-desc">Monitor platform speed, errors, and reliability to ensure optimal performance.</div>
+          </div>
+          <label class="cs-toggle">
+            <input type="checkbox" id="cs-pref-performance" />
+            <span class="cs-toggle-slider"></span>
+          </label>
+        </div>
+        <div class="cs-pref-row">
+          <div class="cs-pref-info">
+            <div class="cs-pref-name">Marketing Cookies</div>
+            <div class="cs-pref-desc">Used to deliver relevant content and measure campaign effectiveness.</div>
+          </div>
+          <label class="cs-toggle">
+            <input type="checkbox" id="cs-pref-marketing" />
+            <span class="cs-toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+      <div id="cs-cookie-modal-footer">
+        <button class="cs-cookie-btn cs-cookie-btn-accept" id="cs-cookie-save">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var STORAGE_KEY = 'claimsave_cookie_consent';
+    var banner = document.getElementById('cs-cookie-banner');
+    var fab = document.getElementById('cs-cookie-fab');
+    var overlay = document.getElementById('cs-cookie-modal-overlay');
+    var prefAnalytics = document.getElementById('cs-pref-analytics');
+    var prefPerformance = document.getElementById('cs-pref-performance');
+    var prefMarketing = document.getElementById('cs-pref-marketing');
+
+    function getConsent(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)); }catch(e){ return null; } }
+
+    function saveConsent(prefs){
+      prefs.essential = true;
+      prefs.timestamp = new Date().toISOString();
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(prefs));
+      hideBanner();
+      loadConsentedScripts(prefs);
+    }
+
+    function showBanner(){ banner.classList.add('cs-visible'); fab.style.display = 'none'; }
+    function hideBanner(){ banner.classList.remove('cs-visible'); fab.style.display = 'flex'; }
+    function showModal(){ overlay.classList.add('cs-visible'); }
+    function hideModal(){ overlay.classList.remove('cs-visible'); }
+
+    function loadConsentedScripts(prefs){
+      if(prefs.analytics){
+        /* ── INSERT ANALYTICS SCRIPTS HERE ── */
+      }
+      if(prefs.performance){
+        /* ── INSERT PERFORMANCE SCRIPTS HERE ── */
+      }
+      if(prefs.marketing){
+        /* ── INSERT MARKETING SCRIPTS HERE ── */
+      }
+    }
+
+    document.getElementById('cs-cookie-accept').addEventListener('click', function(){
+      saveConsent({ analytics:true, performance:true, marketing:true });
+    });
+
+    document.getElementById('cs-cookie-reject').addEventListener('click', function(){
+      saveConsent({ analytics:false, performance:false, marketing:false });
+    });
+
+    document.getElementById('cs-cookie-manage').addEventListener('click', function(){
+      var c = getConsent();
+      prefAnalytics.checked = c ? c.analytics : false;
+      prefPerformance.checked = c ? c.performance : false;
+      prefMarketing.checked = c ? c.marketing : false;
+      showModal();
+    });
+
+    document.getElementById('cs-cookie-save').addEventListener('click', function(){
+      saveConsent({ analytics:prefAnalytics.checked, performance:prefPerformance.checked, marketing:prefMarketing.checked });
+      hideModal();
+    });
+
+    document.getElementById('cs-cookie-modal-close').addEventListener('click', hideModal);
+    overlay.addEventListener('click', function(e){ if(e.target === overlay) hideModal(); });
+
+    fab.addEventListener('click', function(){
+      var c = getConsent();
+      prefAnalytics.checked = c ? c.analytics : false;
+      prefPerformance.checked = c ? c.performance : false;
+      prefMarketing.checked = c ? c.marketing : false;
+      showBanner();
+    });
+
+    var existing = getConsent();
+    if(existing){
+      fab.style.display = 'flex';
+      loadConsentedScripts(existing);
+    } else {
+      setTimeout(function(){ showBanner(); }, 500);
+    }
+  })();
+  </script>
+
 </body>
 </html>
