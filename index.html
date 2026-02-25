@@ -1147,6 +1147,59 @@
       .mobile-features { flex-direction: column; align-items: center; }
     }
 
+    /* ── Claims Photo Banner ──────────────────────────────── */
+    .claims-photo-banner {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .claims-photo-banner .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .claims-photo-banner .overlay-content {
+      text-align: center;
+      color: #fff;
+      max-width: 700px;
+      padding: 0 5%;
+    }
+    .claims-photo-banner .overlay-content h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .claims-photo-banner .overlay-content p {
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.7;
+    }
+    @media (max-width: 1024px) {
+      .claims-photo-banner { height: 50vh; }
+      .claims-photo-banner .overlay-content h2 { font-size: 2.2rem; }
+    }
+    @media (max-width: 768px) {
+      .claims-photo-banner {
+        height: 45vh;
+        background-attachment: scroll;
+      }
+      .claims-photo-banner .overlay-content h2 { font-size: 1.8rem; }
+      .claims-photo-banner .overlay-content p { font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .claims-photo-banner { height: 40vh; }
+      .claims-photo-banner .overlay-content h2 { font-size: 1.5rem; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .floating-card { animation: none; }
       .fade-in { transition: none; opacity: 1; transform: none; }
@@ -1590,6 +1643,17 @@
             <img src="app-screenshot.png" alt="ClaimSave on mobile" class="phone-screen" />
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Claims Photo Banner ─────────────────────────────── -->
+  <section class="claims-photo-banner" style="background-image: url('claims-photo.png')">
+    <div class="overlay">
+      <div class="overlay-content">
+        <div class="section-label" style="color:#5eead4">Instant Documentation</div>
+        <h2>Capture. Submit. Resolve.</h2>
+        <p>Employees can photograph damage on-site and submit claims instantly &mdash; giving your team real-time visibility from the moment an incident occurs.</p>
       </div>
     </div>
   </section>
