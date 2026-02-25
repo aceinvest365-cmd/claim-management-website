@@ -896,8 +896,14 @@
       align-items: center;
       gap: 12px;
     }
-    .video-banner .overlay-content .logo-icon {
-      height: 64px;
+    .video-banner .hero-title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .video-banner .tick-icon {
+      height: 56px;
       width: auto;
     }
     .video-banner .overlay-content h2 {
@@ -936,7 +942,7 @@
       }
       .video-banner .overlay-content h2 { font-size: 2.2rem; }
       .video-banner .overlay-content p { font-size: 1rem; }
-      .video-banner .overlay-content .logo-icon { height: 52px; width: auto; }
+      .video-banner .tick-icon { height: 44px; }
 
       .section { padding: 72px 0; }
       .nav-links { display: none; }
@@ -1013,6 +1019,7 @@
     @media (max-width: 480px) {
       .video-banner .overlay-content h2 { font-size: 1.8rem; }
       .video-banner .overlay-content p { font-size: 0.9rem; }
+      .video-banner .tick-icon { height: 36px; }
 
       .hero h1 { font-size: 1.8rem; }
       .hero-card { padding: 20px; }
@@ -1251,8 +1258,10 @@
     </video>
     <div class="overlay">
       <div class="overlay-content">
-        <img src="logo.png" alt="ClaimSave" class="logo-icon" />
-        <h2>ClaimSave</h2>
+        <div class="hero-title">
+          <img src="tick.png" alt="" class="tick-icon" />
+          <h2>ClaimSave</h2>
+        </div>
         <p>Insurance Claims Management</p>
       </div>
     </div>
