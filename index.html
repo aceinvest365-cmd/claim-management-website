@@ -1034,12 +1034,14 @@
       background: linear-gradient(135deg, #0a1628 0%, #0f172a 50%, #1a1a2e 100%);
       position: relative;
       overflow: hidden;
+      min-height: 600px;
     }
     .mobile-showcase-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
-      align-items: stretch;
+      align-items: center;
+      min-height: 400px;
     }
     .mobile-text .section-heading { color: #fff; }
     .mobile-text .section-sub {
@@ -1068,24 +1070,21 @@
       box-shadow: 0 8px 24px rgba(13,148,136,0.3);
     }
     .mobile-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      align-self: stretch;
-      margin: -60px 0;
+      position: static;
     }
     .phone-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
     }
     .phone-container .phone-screen {
-      max-width: 100%;
-      max-height: 100%;
+      max-width: 90%;
+      max-height: 90%;
       object-fit: contain;
       display: block;
       filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
@@ -1133,18 +1132,24 @@
 
     @media (max-width: 1024px) {
       .mobile-showcase-grid { gap: 40px; }
-      .phone-container .phone-screen { max-height: 440px; }
     }
     @media (max-width: 768px) {
+      .mobile-showcase { min-height: auto; }
       .mobile-showcase-grid {
         grid-template-columns: 1fr;
         text-align: center;
       }
       .mobile-text .showcase-cta { width: 100%; justify-content: center; }
       .mobile-features { justify-content: center; flex-wrap: wrap; }
-      .phone-container { max-width: 400px; margin: 0 auto; }
-      .mobile-visual { order: -1; margin: 0; height: auto; }
-      .phone-container .phone-screen { max-height: 380px; }
+      .mobile-visual { order: -1; }
+      .phone-container {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        top: auto; bottom: auto; right: auto;
+      }
+      .phone-container .phone-screen { max-width: 100%; max-height: 380px; }
     }
     @media (max-width: 480px) {
       .phone-container { max-width: 320px; }
@@ -1160,7 +1165,7 @@
       overflow: hidden;
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
+      background-attachment: scroll;
     }
     .claims-photo-banner .overlay {
       position: absolute;
