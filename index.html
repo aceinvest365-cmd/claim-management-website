@@ -1075,13 +1075,14 @@
     }
     .phone-container {
       position: relative;
-      width: 320px;
+      max-width: 420px;
+      width: 100%;
     }
     .phone-container .phone-screen {
       width: 100%;
       height: auto;
       display: block;
-      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.5));
+      filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
     }
     .mobile-glow-1 {
       position: absolute;
@@ -1126,7 +1127,7 @@
 
     @media (max-width: 1024px) {
       .mobile-showcase-grid { gap: 40px; }
-      .phone-container { width: 280px; }
+      .phone-container { max-width: 360px; }
     }
     @media (max-width: 768px) {
       .mobile-showcase-grid {
@@ -1135,11 +1136,11 @@
       }
       .mobile-text .showcase-cta { width: 100%; justify-content: center; }
       .mobile-features { justify-content: center; flex-wrap: wrap; }
-      .phone-container { width: 260px; }
+      .phone-container { max-width: 320px; }
       .mobile-visual { order: -1; }
     }
     @media (max-width: 480px) {
-      .phone-container { width: 220px; }
+      .phone-container { max-width: 260px; }
       .mobile-features { flex-direction: column; align-items: center; }
     }
 
