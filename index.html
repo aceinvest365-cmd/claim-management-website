@@ -127,17 +127,9 @@
       gap: 8px;
     }
     .logo-icon {
-      width: 32px;
       height: 32px;
-      border-radius: 50%;
-      background: #0d9488;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 800;
-      line-height: 1;
+      width: auto;
+      object-fit: contain;
     }
     .nav-links {
       display: flex;
@@ -905,11 +897,8 @@
       gap: 12px;
     }
     .video-banner .overlay-content .logo-icon {
-      width: 64px;
       height: 64px;
-      font-size: 1.6rem;
-      background: #0d9488;
-      border-radius: 14px;
+      width: auto;
     }
     .video-banner .overlay-content h2 {
       font-size: 3rem;
@@ -947,7 +936,7 @@
       }
       .video-banner .overlay-content h2 { font-size: 2.2rem; }
       .video-banner .overlay-content p { font-size: 1rem; }
-      .video-banner .overlay-content .logo-icon { width: 52px; height: 52px; font-size: 1.3rem; border-radius: 12px; }
+      .video-banner .overlay-content .logo-icon { height: 52px; width: auto; }
 
       .section { padding: 72px 0; }
       .nav-links { display: none; }
@@ -1053,7 +1042,7 @@
   <nav class="navbar" id="navbar">
     <div class="container">
       <a href="#" class="logo">
-        <div class="logo-icon">C</div>
+        <img src="logo.png" alt="ClaimSave" class="logo-icon" />
         ClaimSave
       </a>
       <ul class="nav-links" id="navLinks">
@@ -1080,7 +1069,7 @@
     </video>
     <div class="overlay">
       <div class="overlay-content">
-        <div class="logo-icon">C</div>
+        <img src="logo.png" alt="ClaimSave" class="logo-icon" />
         <h2>ClaimSave</h2>
         <p>Insurance Claims Management</p>
       </div>
@@ -1552,7 +1541,7 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <a href="#" class="logo">
-            <div class="logo-icon">C</div>
+            <img src="logo.png" alt="ClaimSave" class="logo-icon" />
             ClaimSave
           </a>
           <p>Modern claims management for the modern insurer. Transparent, fast, and built for scale.</p>
