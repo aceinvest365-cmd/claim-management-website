@@ -1091,6 +1091,14 @@
       display: block;
       filter: drop-shadow(0 25px 80px rgba(0,0,0,0.5));
       transform: scale(1.1);
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 15%, black 35%),
+        linear-gradient(to top, transparent 0%, black 20%);
+      -webkit-mask-composite: destination-in;
+      mask-image:
+        linear-gradient(to right, transparent 0%, rgba(0,0,0,0.4) 15%, black 35%),
+        linear-gradient(to top, transparent 0%, black 20%);
+      mask-composite: intersect;
     }
     .mobile-glow-1 {
       position: absolute;
@@ -1150,7 +1158,13 @@
         max-width: 400px;
         margin: 0 auto;
       }
-      .phone-container .phone-screen { width: 100%; max-width: 100%; transform: none; }
+      .phone-container .phone-screen {
+        width: 100%; max-width: 100%; transform: none;
+        -webkit-mask-image: linear-gradient(to top, transparent 0%, black 15%);
+        -webkit-mask-composite: source-over;
+        mask-image: linear-gradient(to top, transparent 0%, black 15%);
+        mask-composite: add;
+      }
     }
     @media (max-width: 480px) {
       .phone-container { max-width: 320px; }
