@@ -1039,7 +1039,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 60px;
-      align-items: center;
+      align-items: stretch;
     }
     .mobile-text .section-heading { color: #fff; }
     .mobile-text .section-sub {
@@ -1072,15 +1072,20 @@
       justify-content: center;
       align-items: center;
       position: relative;
+      align-self: stretch;
+      margin: -60px 0;
     }
     .phone-container {
       position: relative;
       width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .phone-container .phone-screen {
-      width: 100%;
-      height: auto;
-      max-height: 500px;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       display: block;
       filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
@@ -1138,8 +1143,8 @@
       .mobile-text .showcase-cta { width: 100%; justify-content: center; }
       .mobile-features { justify-content: center; flex-wrap: wrap; }
       .phone-container { max-width: 400px; margin: 0 auto; }
+      .mobile-visual { order: -1; margin: 0; height: auto; }
       .phone-container .phone-screen { max-height: 380px; }
-      .mobile-visual { order: -1; }
     }
     @media (max-width: 480px) {
       .phone-container { max-width: 320px; }
