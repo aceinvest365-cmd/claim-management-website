@@ -1271,6 +1271,59 @@
       .claims-photo-banner .overlay-content h2 { font-size: 1.5rem; }
     }
 
+    /* ── Get Started Modal ─────────────────────────────── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 9000;
+      background: rgba(15,23,42,0.55); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.25s ease;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: #fff; border-radius: 20px; padding: 48px 44px;
+      max-width: 500px; width: 100%; position: relative;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.18);
+      transform: translateY(20px); transition: transform 0.25s ease;
+    }
+    .modal-overlay.open .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: #f1f5f9; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    .modal-close:hover { background: #e2e8f0; }
+    .modal-box h3 { font-size: 1.5rem; font-weight: 800; color: #0f172a; margin-bottom: 6px; }
+    .modal-box .modal-sub { font-size: 0.92rem; color: #64748b; margin-bottom: 28px; line-height: 1.6; }
+    .modal-form { display: flex; flex-direction: column; gap: 14px; }
+    .modal-form input, .modal-form select, .modal-form textarea {
+      font-family: inherit; font-size: 0.93rem; padding: 13px 16px;
+      border: 1.5px solid #e2e8f0; border-radius: 10px; outline: none;
+      color: #0f172a; background: #f8fafc; transition: border-color 0.2s;
+      width: 100%;
+    }
+    .modal-form input:focus, .modal-form select:focus, .modal-form textarea:focus {
+      border-color: #0d9488; background: #fff;
+    }
+    .modal-form textarea { resize: vertical; min-height: 90px; }
+    .modal-form .modal-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .modal-form button[type="submit"] { margin-top: 4px; width: 100%; justify-content: center; }
+    .modal-success {
+      text-align: center; padding: 24px 0; display: none;
+    }
+    .modal-success .success-icon {
+      width: 56px; height: 56px; border-radius: 50%; background: #f0fdfa;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;
+    }
+    .modal-success h4 { font-size: 1.2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+    .modal-success p { font-size: 0.9rem; color: #64748b; }
+    @media (max-width: 480px) {
+      .modal-box { padding: 32px 20px; }
+      .modal-form .modal-row { grid-template-columns: 1fr; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .floating-card { animation: none; }
       .fade-in { transition: none; opacity: 1; transform: none; }
@@ -1344,10 +1397,10 @@
         <li><a href="#platform">Platform</a></li>
         <li><a href="#mobile">Mobile</a></li>
         <li><a href="#data">Reporting</a></li>
-        <li class="mobile-cta-item" style="display:none"><a href="https://app.claimsave.co.za" target="_blank" class="mobile-cta">See Our App</a></li>
+        <li class="mobile-cta-item" style="display:none"><button onclick="openModal()" class="mobile-cta">Get Started</button></li>
       </ul>
       <div class="nav-cta">
-        <a href="https://app.claimsave.co.za" target="_blank" class="btn btn-primary">See Our App</a>
+        <button onclick="openModal()" class="btn btn-primary">Get Started</button>
       </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
@@ -1776,10 +1829,10 @@
             </div>
           </div>
           <div style="margin-top:32px">
-            <a href="https://app.claimsave.co.za" class="showcase-cta">
-              Try It Now
+            <button onclick="openModal()" class="showcase-cta">
+              Get Started
               <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </a>
+            </button>
           </div>
         </div>
         <div class="mobile-visual fade-in">
@@ -2033,6 +2086,48 @@
     </div>
   </footer>
 
+  <!-- ── Get Started Modal ────────────────────────────── -->
+  <div class="modal-overlay" id="getStartedModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <button class="modal-close" id="modalClose" aria-label="Close">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#64748b" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+      <div id="modalFormWrap">
+        <h3 id="modalTitle">Get started with ClaimSave</h3>
+        <p class="modal-sub">Fill in your details and one of our team will be in touch within one business day.</p>
+        <form class="modal-form" id="modalForm" onsubmit="handleModalForm(event)">
+          <div class="modal-row">
+            <input type="text" name="firstName" placeholder="First name" required />
+            <input type="text" name="lastName" placeholder="Last name" required />
+          </div>
+          <input type="email" name="email" placeholder="Work email" required />
+          <input type="text" name="company" placeholder="Company / Organisation" required />
+          <input type="tel" name="phone" placeholder="Phone number (optional)" />
+          <select name="role">
+            <option value="" disabled selected>Your role</option>
+            <option>Claims Director / Manager</option>
+            <option>Insurance Broker</option>
+            <option>Fleet / Logistics Manager</option>
+            <option>IT / Systems</option>
+            <option>Other</option>
+          </select>
+          <textarea name="message" placeholder="Anything specific you'd like to discuss? (optional)"></textarea>
+          <button type="submit" class="btn btn-primary">
+            Send My Details
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+          </button>
+        </form>
+      </div>
+      <div class="modal-success" id="modalSuccess">
+        <div class="success-icon">
+          <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#0d9488" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+        </div>
+        <h4>Thanks, we'll be in touch!</h4>
+        <p>We've received your details and will reach out within one business day.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- ── Cookie Consent Banner ────────────────────────── -->
   <style>
     #cs-cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#fff;box-shadow:0 -4px 24px rgba(0,0,0,.08);border-top:1px solid #e2e8f0;padding:24px 5%;transform:translateY(100%);opacity:0;transition:transform .35s ease,opacity .35s ease;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
@@ -2280,6 +2375,44 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Get Started Modal
+    const modal = document.getElementById('getStartedModal');
+    function openModal() {
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    function handleModalForm(e) {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+      const f = form;
+      const mailto = 'mailto:hello@claimsave.co.za?subject=New%20Enquiry%20from%20' +
+        encodeURIComponent((f.firstName.value + ' ' + f.lastName.value).trim()) +
+        '&body=' + encodeURIComponent(
+          'Name: ' + f.firstName.value + ' ' + f.lastName.value +
+          '\nEmail: ' + f.email.value +
+          '\nCompany: ' + f.company.value +
+          '\nPhone: ' + (f.phone.value || 'N/A') +
+          '\nRole: ' + (f.role.value || 'N/A') +
+          '\nMessage: ' + (f.message.value || 'N/A')
+        );
+      window.location.href = mailto;
+      setTimeout(() => {
+        document.getElementById('modalFormWrap').style.display = 'none';
+        document.getElementById('modalSuccess').style.display = 'block';
+      }, 400);
+    }
 
     // Feature tabs
     document.querySelectorAll('.feature-tab-btn').forEach(btn => {
