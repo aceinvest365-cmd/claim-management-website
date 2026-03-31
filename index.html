@@ -1044,6 +1044,22 @@
 
       .footer-grid { grid-template-columns: 1fr; gap: 28px; }
       .footer-bottom { flex-wrap: wrap; gap: 12px; justify-content: center; }
+
+      /* Feature tabs */
+      .feature-tabs { gap: 8px; }
+      .feature-tab-btn { flex: 1 1 calc(50% - 4px); text-align: center; padding: 10px 12px; font-size: 0.82rem; }
+
+      /* Demo form */
+      .demo-form { flex-direction: column; }
+      .demo-form input { flex: 1 1 auto; width: 100%; }
+      .demo-form button { width: 100%; justify-content: center; }
+
+      /* Testimonials */
+      .testimonial-card { padding: 28px 20px; }
+
+      /* Who metrics */
+      .who-metrics { flex-wrap: wrap; gap: 24px; }
+      .who-metric { flex: 1 1 calc(50% - 12px); }
     }
 
     @media (max-width: 480px) {
@@ -1064,6 +1080,13 @@
       .who-metrics { flex-direction: column; gap: 20px; }
       .section-heading { font-size: 1.6rem; }
       .cta-inner h2 { font-size: 1.5rem; }
+
+      /* Feature tabs full-width on tiny screens */
+      .feature-tab-btn { flex: 1 1 100%; }
+
+      /* Testimonials */
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .testimonial-card { padding: 24px 16px; }
     }
 
     /* ── Mobile Showcase ────────────────────────────────── */
