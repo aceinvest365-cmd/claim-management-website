@@ -1379,9 +1379,240 @@
     .testimonial-role { font-size: 0.8rem; color: #94a3b8; }
     @media (max-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (max-width: 768px) { .testimonials-grid { grid-template-columns: 1fr; } }
+
+    /* ═══════════════════════════════════════════════════
+       DARK REDESIGN OVERRIDES — bold, navy, professional
+       ═══════════════════════════════════════════════════ */
+
+    /* 1. Body & Base */
+    body { background: #0a0f1e; color: #f1f5f9; }
+
+    /* 2. Top Utility Bar */
+    .nav-topbar {
+      background: #060c18;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 9px 5%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 28px;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1001;
+    }
+    .nav-topbar a {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.2s;
+    }
+    .nav-topbar a:hover { color: #fff; }
+    .nav-topbar .btn { padding: 8px 20px; font-size: 0.82rem; }
+
+    /* 2b. Navbar pushed below top bar */
+    .navbar {
+      top: 37px;
+      background: rgba(10,15,30,0.95);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .navbar.scrolled { box-shadow: 0 1px 12px rgba(0,0,0,0.3); }
+
+    /* 2c. Video banner margin accounts for both bars */
+    .video-banner { margin-top: calc(68px + 37px); }
+
+    /* 2d. Logo */
+    .logo { color: #f1f5f9; }
+
+    /* 2e. Nav links */
+    .nav-links a { color: rgba(255,255,255,0.7); }
+    .nav-links a:hover { color: #fff; }
+
+    /* 2f. Mobile hamburger bars */
+    .mobile-toggle span { background: #f1f5f9; }
+
+    /* 2g. Mobile open menu */
+    .nav-links.open {
+      background: #0d1224;
+      border-color: rgba(255,255,255,0.08);
+    }
+    .nav-links.open a { color: rgba(255,255,255,0.8); }
+
+    /* 2h. Hide topbar on mobile */
+    @media (max-width: 768px) {
+      .nav-topbar { display: none; }
+      .navbar { top: 0; }
+      .video-banner { margin-top: 68px; }
+    }
+
+    /* 3. Section Backgrounds */
+    .who-section { background: #0d1224; }
+    .features-section { background: #0a0f1e; }
+    .benefits-section { background: #0d1224; }
+    .platform-section { background: #0a0f1e; }
+    .testimonials-section { background: #0d1224; }
+    .cta-section { background: #0a0f1e; }
+    .footer {
+      background: #060c18;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* 4. Text Colors on Dark Sections */
+    .section-heading { color: #f1f5f9; }
+    .section-sub { color: #94a3b8; }
+    .section-label { color: #5eead4; }
+    .who-text p { color: #94a3b8; }
+    .who-metric .small { color: #64748b; }
+
+    /* 5. Buttons */
+    .btn { border-radius: 6px; }
+    .btn-secondary {
+      background: transparent;
+      color: #f1f5f9;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.4);
+      transform: translateY(-1px);
+    }
+
+    /* 6. Hero Section */
+    .hero { background: #0a0f1e; }
+    .hero h1 { color: #f1f5f9; }
+    .hero p { color: #94a3b8; }
+    .hero-badge {
+      background: rgba(13,148,136,0.15);
+      border-color: rgba(13,148,136,0.25);
+      color: #5eead4;
+    }
+    .hero-card {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      box-shadow: none;
+    }
+    .hero-card-header h4 { color: #f1f5f9; }
+    .hero-card-stats { border-top-color: rgba(255,255,255,0.08); }
+    .stat-item .num { color: #f1f5f9; }
+    .stat-item .lbl { color: #64748b; }
+    .progress-line .label { color: #94a3b8; }
+    .progress-bar { background: rgba(255,255,255,0.08); }
+
+    /* 7. Who Cards */
+    .who-card {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.08);
+    }
+    .who-card:hover {
+      border-color: rgba(13,148,136,0.4);
+      box-shadow: 0 4px 16px rgba(13,148,136,0.08);
+    }
+    .who-card h4 { color: #f1f5f9; }
+    .who-card p { color: #94a3b8; }
+
+    /* 8. Feature Cards */
+    .feature-card {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.07);
+    }
+    .feature-card:hover {
+      border-color: rgba(13,148,136,0.3);
+      background: rgba(13,148,136,0.06);
+      box-shadow: none;
+      transform: translateY(-4px);
+    }
+    .feature-card h3 { color: #f1f5f9; }
+    .feature-card p { color: #94a3b8; }
+
+    /* 9. Feature Tab Buttons */
+    .feature-tab-btn {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
+      border-radius: 6px;
+    }
+    .feature-tab-btn:hover { border-color: #0d9488; color: #0d9488; }
+    .feature-tab-btn.active { background: #0d9488; border-color: #0d9488; color: #fff; }
+
+    /* 10. Benefit Cards */
+    .benefit-card {
+      background: linear-gradient(180deg, rgba(13,148,136,0.08) 0%, rgba(13,148,136,0.02) 100%);
+      border-color: rgba(13,148,136,0.15);
+    }
+    .benefit-card:hover { box-shadow: 0 12px 36px rgba(13,148,136,0.12); transform: translateY(-4px); }
+    .benefit-card h3 { color: #f1f5f9; }
+    .benefit-card p { color: #94a3b8; }
+
+    /* 11. Platform Cards */
+    .platform-card {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.07);
+    }
+    .platform-card:hover { box-shadow: none; border-color: rgba(13,148,136,0.3); transform: translateY(-2px); }
+    .platform-card h4 { color: #f1f5f9; }
+    .platform-card p { color: #94a3b8; }
+
+    /* 12. Testimonial Cards */
+    .testimonial-card {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.07);
+      color: #f1f5f9;
+    }
+    .testimonial-card:hover { box-shadow: none; transform: translateY(-4px); }
+    .testimonial-text { color: #94a3b8; }
+    .testimonial-name { color: #f1f5f9; }
+
+    /* 13. Footer */
+    .footer-col h4 { color: #f1f5f9; }
+    .footer-col a { color: rgba(255,255,255,0.5); }
+    .footer-col a:hover { color: #0d9488; }
+    .footer-brand p { color: #64748b; }
+    .footer-bottom { border-top-color: rgba(255,255,255,0.08); }
+    .footer-bottom p { color: #475569; }
+    .footer-socials a {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+    }
+    .footer-socials a:hover {
+      border-color: #0d9488;
+      background: rgba(13,148,136,0.1);
+    }
+    /* Lighten footer SVG icons */
+    .footer-socials a svg { fill: rgba(255,255,255,0.5); }
+
+    /* 14. Modal */
+    .modal-box {
+      background: #0d1224;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .modal-box h3 { color: #f1f5f9; }
+    .modal-box .modal-sub { color: #94a3b8; }
+    .modal-form input,
+    .modal-form select,
+    .modal-form textarea {
+      background: rgba(255,255,255,0.06);
+      border-color: rgba(255,255,255,0.12);
+      color: #f1f5f9;
+    }
+    .modal-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .modal-form select option { background: #0d1224; color: #f1f5f9; }
+    .modal-form input:focus,
+    .modal-form select:focus,
+    .modal-form textarea:focus {
+      border-color: #0d9488;
+      background: rgba(13,148,136,0.08);
+    }
+    .modal-close { background: rgba(255,255,255,0.08); }
+    .modal-close:hover { background: rgba(255,255,255,0.15); }
+    .modal-success h4 { color: #f1f5f9; }
+    .modal-success p { color: #94a3b8; }
   </style>
 </head>
 <body>
+
+  <!-- ── Top Utility Bar ──────────────────────────────── -->
+  <div class="nav-topbar">
+    <a href="mailto:hello@claimsave.co.za">hello@claimsave.co.za</a>
+    <button onclick="openModal()" class="btn btn-primary">Get Started</button>
+  </div>
 
   <!-- ── Navbar ────────────────────────────────────────── -->
   <nav class="navbar" id="navbar">
@@ -1399,9 +1630,6 @@
         <li><a href="#data">Reporting</a></li>
         <li class="mobile-cta-item" style="display:none"><button onclick="openModal()" class="mobile-cta">Get Started</button></li>
       </ul>
-      <div class="nav-cta">
-        <button onclick="openModal()" class="btn btn-primary">Get Started</button>
-      </div>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span><span></span><span></span>
       </button>
@@ -1837,7 +2065,7 @@
         </div>
         <div class="mobile-visual fade-in">
           <div class="phone-container">
-            <img src="app-screenshot.png" alt="ClaimSave on mobile" class="phone-screen" />
+            <img src="phone.jpeg" alt="ClaimSave on mobile" class="phone-screen" />
           </div>
         </div>
       </div>
