@@ -332,29 +332,53 @@
       .platform-grid{grid-template-columns:repeat(2,1fr)}
     }
     @media(max-width:768px){
+      .container{padding:0 22px}
       .nav-links,.nav-cta{display:none}
-      .mobile-toggle{display:flex}
+      .mobile-toggle{display:flex;padding:8px;margin-right:-8px}
+      .mobile-menu a{padding:12px 0}
       .stats-bar .container{grid-template-columns:repeat(2,1fr)}
+      .stats-bar .container{padding:0}
+      .stat-item{padding:28px 14px}
       .stat-item:nth-child(2){border-right:none}
+      .stat-item:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.06)}
+      .stat-number{font-size:1.85rem}
       .steps-grid,.types-grid,.benefits-grid,.testimonials-grid{grid-template-columns:1fr}
       .claim-types-header{flex-direction:column;align-items:flex-start;gap:16px}
       .feature-tab-panel.active{grid-template-columns:1fr}
       .who-cards{grid-template-columns:1fr}
       .platform-grid{grid-template-columns:1fr}
       .footer-top{grid-template-columns:1fr;gap:28px}
-      .footer-bottom{flex-direction:column;align-items:flex-start}
-      .section{padding:70px 0}
-      .cta-inner{padding:44px 28px}
-      .cta-inner h2{font-size:1.7rem}
-      .photo-banner{height:42vh}
-      .feature-tabs{justify-content:flex-start}
+      .footer-bottom{flex-direction:column;align-items:flex-start;gap:18px}
+      .section{padding:64px 0}
+      .hero .container{padding-top:96px;padding-bottom:64px}
+      .hero h1{font-size:clamp(2.1rem,8vw,2.8rem);line-height:1.1}
+      .hero p{font-size:1rem;margin-bottom:32px}
+      .hero-buttons .btn{padding:14px 24px}
+      .section-heading{font-size:clamp(1.6rem,6vw,2.2rem)}
+      .section-sub{font-size:.94rem}
+      .cta-inner{padding:36px 24px;border-radius:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05)}
+      .cta-inner h2{font-size:1.6rem}
+      .video-cta-section{padding:56px 0}
+      .video-cta-player{border-radius:8px}
+      .photo-banner{height:38vh;min-height:280px}
+      .feature-tabs{justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;margin:0 -22px 32px;padding:0 22px 8px;-webkit-overflow-scrolling:touch}
+      .feature-tab-btn{flex-shrink:0}
+      .mobile-section .phone-wrap img{width:100%;-webkit-mask-image:radial-gradient(ellipse 70% 70% at center,#000 30%,rgba(0,0,0,.4) 60%,transparent 90%);mask-image:radial-gradient(ellipse 70% 70% at center,#000 30%,rgba(0,0,0,.4) 60%,transparent 90%)}
+      .mobile-glow-1{width:280px;height:280px;left:-100px}
+      .mobile-glow-2{width:240px;height:240px;right:-80px}
+      .modal-box{padding:32px 24px}
+      .legal-body{padding:24px 22px}
+      #cs-cookie-banner{padding:16px 22px max(16px,env(safe-area-inset-bottom)) 22px}
+      #cs-cookie-banner-inner{gap:14px}
+      .cs-cookie-btn{flex:1;text-align:center}
     }
     @media(max-width:480px){
       .hero-buttons,.demo-form{flex-direction:column}
       .hero-buttons .btn,.demo-form input,.demo-form button{width:100%;justify-content:center}
       .modal-row{grid-template-columns:1fr}
-      .mobile-features{flex-direction:column}
+      .mobile-features{flex-direction:column;gap:14px}
       .who-metrics{flex-direction:column;gap:20px}
+      .footer-brand p{max-width:none}
     }
     @media(prefers-reduced-motion:reduce){
       .fade-in{transition:none;opacity:1;transform:none}
